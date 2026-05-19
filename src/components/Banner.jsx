@@ -36,7 +36,7 @@ const Banner = () => {
     }, [])
 
     return (
-        <div className='w-full mt-10 flex justify-center my-5'>
+        <div className='w-full mt-5 flex justify-center my-5'>
             <div className='w-11/12 rounded overflow-hidden h-[60vh] md:h-[70vh] relative'>
 
                 <div className='flex h-full transition-transform duration-700 ease-in-out'
