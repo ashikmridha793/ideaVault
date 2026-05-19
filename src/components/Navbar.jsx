@@ -11,7 +11,7 @@ const Navbar = () => {
 
                 <Link
                     href='/'
-                    className='md:text-3xl text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text'>
+                    className='md:text-3xl text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text tracking-tighter'>
                     IdeaVault
                 </Link>
 

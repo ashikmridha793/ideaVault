@@ -11,12 +11,12 @@ const vaultSlide = [
     {
         "title": "Startup Idea Vault",
         "description": "A platform for entrepreneurs to store, categorize, validate, and collaborate on business ideas with their team.",
-        "image": "/assets/banner-2.webp"
+        "image": "/assets/banner-2.jpg"
     },
     {
         "title": "Creative Design Vault",
         "description": "A smart vault system for designers and content creators to save inspirations, templates, color palettes, and project references.",
-        "image": "/assets/banner-3.webp"
+        "image": "/assets/banner-3.jpg"
     },
     {
         "title": "Personal Memory Vault",
@@ -36,8 +36,8 @@ const Banner = () => {
     }, [])
 
     return (
-        <div className='w-full mt-10 flex justify-center'>
-            <div className='w-11/12 rounded overflow-hidden h-[60vh] md:h-[80vh]  relative'>
+        <div className='w-full mt-10 flex justify-center my-5'>
+            <div className='w-11/12 rounded overflow-hidden h-[60vh] md:h-[70vh] relative'>
 
                 <div className='flex h-full transition-transform duration-700 ease-in-out'
                     style={{
@@ -50,13 +50,13 @@ const Banner = () => {
                                 className="w-full flex-shrink-0 bg-cover bg-center rounded-lg"
                                 style={{ backgroundImage: `url(${vault.image})` }}>
 
-                                <div className="text-white md:pl-20 p-5 h-full flex flex-col justify-center">
-                                    <h3 className="text-4xl font-bold mb-2">
+                                <div className="text-white md:pl-20 p-5 h-full flex flex-col justify-center md:w-2/5 rounded-lg">
+                                    <h3 className="text-4xl md:text-6xl font-bold mb-2">
                                         {vault.title}</h3>
-                                    <p className="">
+                                    <p className="md:text-lg">
                                         {vault.description}
                                     </p>
-                                    <Button variant="primary" className="mt-4">Learn More</Button>
+                                    <Button variant="primary" className="mt-4">Explore Ideas</Button>
                                 </div>
                             </div>
                         ))}
