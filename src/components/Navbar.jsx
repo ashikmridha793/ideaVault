@@ -34,6 +34,10 @@ const Navbar = () => {
                             <Link href='/add-idea' className='hover:text-blue-300'>Add Idea
                             </Link>
                         </li>
+                        <li>
+                            <Link href='/my-profile' className='hover:text-blue-300'>My Profile
+                            </Link>
+                        </li>
                     </li>
                     <li>
                         <div className='flex items-center space-x-4'>
