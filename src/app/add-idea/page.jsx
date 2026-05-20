@@ -7,10 +7,11 @@ const AddIdeaPage = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        const form = e.currentTarget
         const formData = new FormData(e.currentTarget)
         const idea = Object.fromEntries(formData.entries())
-
         console.log(idea)
+
     try {
         const res = await fetch('http://localhost:8000/ideas', {
             method: 'POST',
@@ -27,7 +28,7 @@ const AddIdeaPage = () => {
             toast.error('Failed to add idea. Please try again.')
         }
     }catch (error) {
-        console.log(error)
+        toast.error('Somthing Went Worng')
     }
 }
 
@@ -123,7 +124,7 @@ const AddIdeaPage = () => {
 
                             <div>
                                 <TextField name="sortDescription" type="text" isRequired>
-                                    <Label>Sort Description</Label>
+                                    <Label>Short Description</Label>
                                     <TextArea placeholder="Describe the estimated budget for your startup..."
                                         className='rounded-2xl min-h-32 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400' />
                                     <FieldError />
