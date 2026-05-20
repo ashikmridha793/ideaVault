@@ -1,7 +1,15 @@
-import { Input, TextArea, Select,  Button, FieldError, Label, TextField, ListBox,  } from "@heroui/react";
+'use client'
+import { Input, TextArea, Select, Button, FieldError, Label, TextField, ListBox, } from "@heroui/react";
 
 
 const AddIdeaPage = () => {
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget)
+        const idea = Object.fromEntries(formData.entries())
+        console.log(idea)
+    }
 
     const categories = [
         "Teach",
@@ -15,9 +23,9 @@ const AddIdeaPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center py-6 px-3 sm:p-6">
-            <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden p-6">
-                <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-5 sm:p-8 text-white">
+        <div className="min-h-screen flex items-center justify-center py-6 px-3 sm:p-6">
+            <div className="w-full max-w-4xl backdrop-blur-xl border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden p-6">
+                <div className="p-5 sm:p-7 bg-white/10 rounded-2xl">
                     <h1 className="text-2xl sm:text-4xl font-bold mb-2 leading-tight">
                         Add New Idea
                     </h1>
@@ -25,27 +33,22 @@ const AddIdeaPage = () => {
                         Share your innovative concepts and bring them to life.
                     </p>
                 </div>
-                <form 
+                <form
+                    onSubmit={onSubmit}
                     className="md:p-10 md:space-y-8 md:w-3xl"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Destination Name */}
+
                         <div className="md:col-span-2">
-                            <TextField name="destinationName" isRequired>
-                                <Label>Destination Name</Label>
-                                <Input placeholder="Bali Paradise" className="rounded-2xl" />
+                            <TextField name="title" isRequired>
+                                <Label>Idea title</Label>
+                                <Input
+                                    placeholder="Ai study assistant"
+                                    className="rounded-2xlrounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
                                 <FieldError />
                             </TextField>
                         </div>
 
-                        {/* Country */}
-                        <TextField name="country" isRequired>
-                            <Label>Country</Label>
-                            <Input placeholder="Indonesia" className="rounded-2xl" />
-                            <FieldError />
-                        </TextField>
-
-                        {/* Category - Updated Select Component */}
                         <div>
                             <Select
 
@@ -55,99 +58,104 @@ const AddIdeaPage = () => {
                                 placeholder="Select category"
                             >
                                 <Label>Category</Label>
-                                <Select.Trigger className="rounded-2xl">
+                                <Select.Trigger className="rounded-2xl min-h-12 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400">
                                     <Select.Value />
                                     <Select.Indicator />
                                 </Select.Trigger>
+
                                 <Select.Popover>
-                                    <ListBox>
-                                        <ListBox.Item id="Beach" textValue="Beach">
-                                            Beach
-                                            <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="Mountain" textValue="Mountain">
-                                            Mountain
-                                            <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="City" textValue="City">
-                                            City
-                                            <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="Adventure" textValue="Adventure">
-                                            Adventure
-                                            <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="Cultural" textValue="Cultural">
-                                            Cultural
-                                            <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="Luxury" textValue="Luxury">
-                                            Luxury
-                                            <ListBox.ItemIndicator />
-                                        </ListBox.Item>
+                                    <ListBox >
+                                        {categories.map((cat) => (
+                                            <ListBox.Item
+                                                key={cat}
+                                                textValue={cat}>
+                                                {cat}
+                                                <ListBox.ItemIndicator />
+                                            </ListBox.Item>
+                                        ))}
                                     </ListBox>
                                 </Select.Popover>
                             </Select>
                         </div>
 
-                        {/* Price */}
-                        <TextField name="price" type="number" isRequired>
-                            <Label>Price (USD)</Label>
-                            <Input
-                                type="number"
-                                placeholder="1299"
-                                className="rounded-2xl"
-                            />
-                            <FieldError />
-                        </TextField>
-
-                        {/* Duration */}
-                        <TextField name="duration" isRequired>
-                            <Label>Duration</Label>
-                            <Input
-                                placeholder="7 Days / 6 Nights"
-                                className="rounded-2xl"
-                            />
-                            <FieldError />
-                        </TextField>
-
-                        {/* Departure Date */}
-                        <div className="md:col-span-2">
-                            <TextField name="departureDate" type="date" isRequired>
-                                <Label>Departure Date</Label>
-                                <Input type="date" className="rounded-2xl" />
-                                <FieldError />
-                            </TextField>
-                        </div>
-
-                        {/* Image URL - Removed preview */}
-                        <div className="md:col-span-2">
-                            <TextField name="imageUrl" isRequired>
-                                <Label>Image URL</Label>
+                        <div>
+                            <TextField name="tags" isRequired>
+                                <Label>Tags</Label>
                                 <Input
-                                    type="url"
-                                    placeholder="https://example.com/bali-paradise.jpg"
-                                    className="rounded-2xl"
-                                />
+                                    placeholder="Ai, Education, etc..."
+                                    className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
                                 <FieldError />
                             </TextField>
                         </div>
 
-                        {/* Description */}
                         <div className="md:col-span-2">
-                            <TextField name="description" isRequired>
+                            <TextField name="imgUrl" isRequired>
+                                <Label>Img URL</Label>
+                                <Input
+                                    placeholder="https://example.com/image.jpg"
+                                    className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
+                                <FieldError />
+                            </TextField>
+                        </div>
+
+                        <div>
+                            <TextField name="price" type="number" isRequired>
+                                <Label>Sort Description</Label>
+                                <TextArea placeholder="Describe the estimated budget for your startup..."
+                                    className='rounded-2xl min-h-32 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400' />
+                                <FieldError />
+                            </TextField>
+                        </div>
+
+                        <div>
+                            <TextField name="price" type="number" isRequired>
                                 <Label>Description</Label>
-                                <TextArea
-                                    placeholder="Describe the travel experience..."
-                                    className="rounded-3xl"
-                                />
+                                <TextArea placeholder="Describe your startup idea..."
+                                    className='rounded-2xl min-h-32 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400' />
+                                <FieldError />
+                            </TextField>
+                        </div>
+                        <div>
+                            <TextField name="title" isRequired>
+                                <Label>Estimated Budget</Label>
+                                <Input
+                                    placeholder="Students, Freelancers, etc..."
+                                    className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
+                                <FieldError />
+                            </TextField>
+                        </div>
+                        <div>
+                            <TextField name="title" isRequired>
+                                <Label>Target Audience</Label>
+                                <Input
+                                    placeholder="Students, Freelancers, etc..."
+                                    className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
+                                <FieldError />
+                            </TextField>
+                        </div>
+                        <div className="md:col-span-2">
+                            <TextField name="title" isRequired>
+                                <Label>Problem Statement</Label>
+                                <Input
+                                    placeholder="Discibe the problem your startup aims to solve..."
+                                    className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
+                                <FieldError />
+                            </TextField>
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <TextField name="title" isRequired>
+                                <Label>Proposed Solution</Label>
+                                <Input
+                                    placeholder="Explain how your startup solves the problem..."
+                                    className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
                                 <FieldError />
                             </TextField>
                         </div>
                     </div>
 
                     {/* Buttons */}
-                    <div className="">
+                    <div className="mt-5">
                         <Button
                             type="submit"
                             variant="outline"
