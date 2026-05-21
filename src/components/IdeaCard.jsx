@@ -7,7 +7,7 @@ import { FaArrowRight } from 'react-icons/fa';
 const IdeaCard = ({ idea }) => {
     const { title, targetAudience, estimatedBudget, category, imgUrl, _id } = idea
     return (
-        <div className='border border-gray-300 rounded-lg p-4 flex flex-col gap-4'>
+        <div className='rounded-lg p-4 flex flex-col gap-4'>
 
             <Image className='rounded-lg w-full h-[32vh]'
                 alt={idea.title}
@@ -23,7 +23,7 @@ const IdeaCard = ({ idea }) => {
                 <Button variant="solid" size="sm"
                     className='mt-3 w-full bg-slate-500 text-white flex justify-center items-center'
                 >
-                    <Link className='block w-full flex justify-center items-center gap-2' href={`/ideas/${_id}`}>
+                    <Link className='block w-full flex justify-center items-center gap-2' href={`/idea/${_id}`}>
                         View Details<FaArrowRight />
                     </Link>
                 </Button>

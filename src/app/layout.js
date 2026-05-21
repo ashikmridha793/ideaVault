@@ -2,6 +2,7 @@ import { Roboto_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "./Providers";
 
 const roboto = Roboto_Slab({
   subsets: ["latin"],
@@ -19,9 +20,12 @@ export default function RootLayout({ children }) {
       className={`${roboto.className}h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
+
       </body>
     </html>
   );
