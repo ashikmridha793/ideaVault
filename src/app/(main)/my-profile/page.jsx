@@ -6,6 +6,7 @@ import { syncJwtFromSession } from "@/lib/api";
 import { Avatar, Button, Form, Input, Label } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { FaArrowDown } from "react-icons/fa6";
 
 export default function MyProfilePage() {
   const { data: session, refetch } = authClient.useSession();
@@ -45,8 +46,8 @@ export default function MyProfilePage() {
       <PageTitle title="Profile" />
       <h1 className="text-3xl font-bold mb-6">Profile Management</h1>
 
-      <div className="flex items-center gap-4 mb-8">
-        <Avatar size="lg">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <Avatar size="xl" className="w-30 h-30 rounded-full">
           <Avatar.Image src={image || user.image} alt={name} />
           <Avatar.Fallback>{name?.charAt(0) || "U"}</Avatar.Fallback>
         </Avatar>
@@ -56,14 +57,21 @@ export default function MyProfilePage() {
         </div>
       </div>
 
+      <div className="flex flex-col justify-center items-center ">
+        Edit<FaArrowDown />
+      </div>
+
       <Form onSubmit={onSubmit} className="space-y-4 border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-900">
         <div>
           <Label>Name</Label>
-          <Input value={name} onChange={(e) => setName(e.target.value)} required />
+          <Input className="w-full"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required />
         </div>
         <div>
           <Label>Photo URL</Label>
-          <Input
+          <Input className="w-full"
             type="url"
             value={image}
             onChange={(e) => setImage(e.target.value)}
