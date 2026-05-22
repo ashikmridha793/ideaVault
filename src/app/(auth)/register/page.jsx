@@ -1,123 +1,128 @@
-"use client"
+"use client";
+
 import { authClient } from "@/lib/auth-client";
-import { Check } from "@gravity-ui/icons";
+import { syncAuthAfterLogin } from "@/lib/api";
+import { validatePassword } from "@/lib/password";
 import { Card } from "@heroui/react";
-import { Button, FieldError, Form, Input, Label, TextField } from "@heroui/react";
-import { redirect } from "next/navigation";
-import { useState } from "react";
+import { Button, Form, Input, Label, TextField } from "@heroui/react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import PageTitle from "@/components/PageTitle";
 
-import { toast, ToastContainer } from "react-toastify";
+function RegisterForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect") || "/";
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const image = formData.get("image");
 
-const RegisterPage = () => {
-
-     const [isShowPassword, setIsShowPassword] = useState(false)
-
-    const onSubmit = async (e) => {
-        e.preventDefault()
-
-        const form = e.currentTarget
-
-        const formData = new FormData(form)
-        const user = Object.fromEntries(formData.entries())
-        console.log(user)
-
-        const { data, error } = await authClient.signUp.email({
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            image: user.image,
-        });
-        if (error) {
-            console.log(error)
-            toast.error(error.message || 'Somthing wants wrong')
-        }else {
-            console.log(data)
-            toast.success('Register sucessfull')
-            redirect('/')
-        }
-
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      toast.error(passwordError);
+      return;
     }
-    const handleGoogleSignIn = async () => {
-            const data = await authClient.signIn.social({
-                provider: "google",
-            });
-            console.log(data)
-        };
 
-    return (
-        <div className="conetiner mx-auto md:mb-20 m-10 space-y-2 border p-2 border-gray-200 shadow-md">
-            <ToastContainer position="top-right" autoClose={3000} />
-            <div className="text-center">
-                <h1 className="text-2xl md:text-4xl font-bold">Creat an account</h1>
-            </div>
-            <Card>
-                <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
-                    <TextField
-                        name="name"
-                        type="text"
+    const { data, error } = await authClient.signUp.email({
+      name,
+      email,
+      password,
+      image: image || undefined,
+    });
 
-                    >
-                        <Label>Name</Label>
-                        <Input placeholder="Enter Your name" />
-                        <FieldError />
-                    </TextField>
-                    <TextField
-                        name="email"
-                        type="email"
-                        validate={(value) => {
-                            if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                                return "Please enter a valid email address";
-                            }
-                            return null;
-                        }}
-                    >
-                        <Label>Email</Label>
-                        <Input placeholder="john@example.com" />
-                        <FieldError />
-                    </TextField>
-                    <TextField
-                        name="image"
-                        type="url"
+    if (error) {
+      toast.error(error.message || "Registration failed.");
+      return;
+    }
+    if (data) {
+      await syncAuthAfterLogin(authClient);
+      toast.success("Account created successfully!");
+      router.push(redirectPath);
+    }
+  };
 
-                    >
-                        <Label>Photo Url</Label>
-                        <Input placeholder="pleas enter your img url" />
-                        <FieldError />
-                    </TextField>
-                    <TextField
-                        minLength={8}
-                        name="password"
-                        type={isShowPassword ? "text" : "password"}
-                    >
-                        <Label>Password</Label>
-                        <Input 
-                        placeholder="Enter your password" />
-                        <FieldError />
-                        <span onClick={() => setIsShowPassword(!isShowPassword)}>
-                            {isShowPassword ?
-                                <p className="flex items-center gap-1 text-sm">Hide Password <FaEye /></p> :
-                                <p className="flex items-center gap-1 text-sm">Show Password <FaEyeSlash /></p>}
-                        </span>
-                    </TextField>
-                    <div className="flex gap-2">
-                        <Button type="submit" className='w-full bg-slate-500 text-white'>
-                            <Check />
-                            Confarm
-                        </Button>
-                    </div>
-                    <div className="w-full bg-slate-200 my-3"></div>
-                    <div>
-                        <Button variant="outline" className="w-full" onClick={handleGoogleSignIn}>
-                            <FcGoogle /> Continue with google
-                        </Button>
-                    </div>
-                </Form>
-            </Card>
-        </div>
-    );
-};
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: redirectPath,
+    });
+  };
 
-export default RegisterPage;
+  return (
+    <div className="container mx-auto max-w-md md:mb-20 my-10 p-6 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-lg bg-white dark:bg-slate-900">
+      <PageTitle title="Register" />
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-4xl font-bold">Create Account</h1>
+        <p className="text-gray-500 mt-2">Join IdeaVault and start sharing ideas</p>
+      </div>
+      <Card className="p-4">
+        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
+          <TextField name="name" isRequired>
+            <Label>Name</Label>
+            <Input placeholder="Your full name" />
+          </TextField>
+          <TextField name="email" isRequired>
+            <Label>Email</Label>
+            <Input type="email" placeholder="you@example.com" />
+          </TextField>
+          <TextField name="image">
+            <Label>Photo URL</Label>
+            <Input type="url" placeholder="https://example.com/photo.jpg" />
+          </TextField>
+          <TextField name="password" isRequired>
+            <Label>Password</Label>
+            <Input
+              type={isShowPassword ? "text" : "password"}
+              placeholder="Min 6 chars, upper & lower case"
+            />
+          </TextField>
+          <button
+            type="button"
+            onClick={() => setIsShowPassword(!isShowPassword)}
+            className="text-sm text-indigo-600 flex items-center gap-1"
+          >
+            {isShowPassword ? (
+              <>
+                Hide Password <FaEye />
+              </>
+            ) : (
+              <>
+                Show Password <FaEyeSlash />
+              </>
+            )}
+          </button>
+          <Button type="submit" className="w-full bg-indigo-600 text-white">
+            Register
+          </Button>
+          <p className="text-center text-sm">
+            Already have an account?{" "}
+            <Link href="/login" className="text-indigo-600 font-semibold">
+              Login
+            </Link>
+          </p>
+          <Button type="button" variant="outline" className="w-full" onPress={handleGoogleSignIn}>
+            <FcGoogle className="text-xl" /> Continue with Google
+          </Button>
+        </Form>
+      </Card>
+    </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<p className="text-center py-20">Loading...</p>}>
+      <RegisterForm />
+    </Suspense>
+  );
+}

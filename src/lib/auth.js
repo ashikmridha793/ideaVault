@@ -1,24 +1,20 @@
-const dns = require("node:dns");
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
-
+import "./mongodb-dns.js";
 import { betterAuth } from "better-auth";
-import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { getMongoClient } from "./mongodb";
 
-const client = new MongoClient(process.env.MONGODB_URI);
+const client = getMongoClient();
 const db = client.db("ideaVault");
 
 export const auth = betterAuth({
-    database: mongodbAdapter(db, {
-        client
-    }),
-    emailAndPassword: {
-        enabled: true,
+  database: mongodbAdapter(db, { client }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
-    socialProviders: {
-        google: {
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
-        },
-    },
+  },
 });

@@ -6,7 +6,7 @@ import TrendingIdea from "@/components/TrendingIdea";
 
 export default function Home() {
   return (
-    <div className="w-auto md:w-11/12  mx-auto">
+    <div className="w-full md:w-11/12 mx-auto">
       <Banner />
       <TrendingIdea />
       <SuccessStories />

@@ -1,196 +1,156 @@
-'use client'
-import { Input, TextArea, Select, Button, FieldError, Label, TextField, ListBox, } from "@heroui/react";
-import { toast, ToastContainer } from "react-toastify";
+"use client";
 
+import PageTitle from "@/components/PageTitle";
+import { authClient } from "@/lib/auth-client";
+import { apiFetch, syncJwtFromSession } from "@/lib/api";
+import {
+  Input,
+  TextArea,
+  Select,
+  Button,
+  Label,
+  TextField,
+  ListBox,
+} from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
-const AddIdeaPage = () => {
+const categories = [
+  "Tech",
+  "Health",
+  "AI",
+  "Education",
+  "Finance",
+  "Business",
+  "Environment",
+  "Lifestyle",
+];
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const form = e.currentTarget
-        const formData = new FormData(e.currentTarget)
-        const idea = Object.fromEntries(formData.entries())
-        console.log(idea)
+export default function AddIdeaPage() {
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const user = session?.user;
+    if (!user) {
+      toast.error("Please log in to add an idea");
+      return;
+    }
+
+    await syncJwtFromSession(user);
+    const formData = new FormData(e.currentTarget);
+    const idea = Object.fromEntries(formData.entries());
 
     try {
-        const res = await fetch('http://localhost:8000/ideas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(idea)
-        })
-        const data = await res.json()
-        if(res.ok){
-            toast.success('Idea added successfully!')
-            form.reset()
-        }else{
-            toast.error('Failed to add idea. Please try again.')
-        }
-    }catch (error) {
-        toast.error('Somthing Went Worng')
+      const res = await apiFetch("/ideas", {
+        method: "POST",
+        body: JSON.stringify(idea),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        toast.error(err.message || "Failed to add idea");
+        return;
+      }
+      toast.success("Idea published successfully!");
+      e.currentTarget.reset();
+      router.push("/my-ideas");
+    } catch {
+      toast.error("Something went wrong. Try again.");
     }
+  };
+
+  return (
+    <>
+      <PageTitle title="Add Idea" />
+      <div className="min-h-screen flex items-center justify-center py-6 px-3 sm:p-6">
+        <div className="w-full max-w-4xl border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl overflow-hidden p-6 bg-white dark:bg-slate-900">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-2">Add New Idea</h1>
+            <p className="text-sm sm:text-lg text-gray-500">
+              Share your startup concept with the IdeaVault community
+            </p>
+          </div>
+
+          <form onSubmit={onSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="md:col-span-2">
+                <TextField name="title" isRequired>
+                  <Label>Idea Title</Label>
+                  <Input placeholder="AI study assistant for students" />
+                </TextField>
+              </div>
+
+              <Select name="category" isRequired placeholder="Select category">
+                <Label>Category</Label>
+                <Select.Trigger className="w-full min-h-12 rounded-xl border border-slate-300">
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+                <Select.Popover>
+                  <ListBox>
+                    {categories.map((cat) => (
+                      <ListBox.Item key={cat} id={cat} textValue={cat}>
+                        {cat}
+                      </ListBox.Item>
+                    ))}
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+
+              <TextField name="tags">
+                <Label>Tags (optional)</Label>
+                <Input placeholder="AI, Education, SaaS" />
+              </TextField>
+
+              <div className="md:col-span-2">
+                <TextField name="imgUrl" isRequired>
+                  <Label>Image URL</Label>
+                  <Input placeholder="https://images.unsplash.com/..." />
+                </TextField>
+              </div>
+
+              <TextField name="sortDescription" isRequired>
+                <Label>Short Description</Label>
+                <TextArea rows={3} placeholder="One-line pitch for your idea" />
+              </TextField>
+
+              <TextField name="description" isRequired>
+                <Label>Detailed Description</Label>
+                <TextArea rows={3} placeholder="Full overview of the startup idea" />
+              </TextField>
+
+              <TextField name="estimatedBudget">
+                <Label>Estimated Budget (optional)</Label>
+                <Input type="number" placeholder="5000" />
+              </TextField>
+
+              <TextField name="targetAudience" isRequired>
+                <Label>Target Audience</Label>
+                <Input placeholder="Students, founders, SMEs..." />
+              </TextField>
+
+              <div className="md:col-span-2">
+                <TextField name="problemStatement" isRequired>
+                  <Label>Problem Statement</Label>
+                  <TextArea rows={3} placeholder="What problem does this solve?" />
+                </TextField>
+              </div>
+
+              <div className="md:col-span-2">
+                <TextField name="proposedSolution" isRequired>
+                  <Label>Proposed Solution</Label>
+                  <TextArea rows={3} placeholder="How does your idea solve it?" />
+                </TextField>
+              </div>
+            </div>
+
+            <Button type="submit" className="w-full bg-indigo-600 text-white py-3">
+              Submit Idea
+            </Button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
-
-    const categories = [
-        "Teach",
-        "Health",
-        "AI",
-        "Education",
-        "Finance",
-        "Business",
-        "Environment",
-        "Lifestyle",
-    ];
-
-    return (
-        <>
-            <ToastContainer position="top-right" autoClose={3000} />
-
-            <div className="min-h-screen flex items-center justify-center py-6 px-3 sm:p-6">
-                <div className="w-full max-w-4xl backdrop-blur-xl border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden p-6">
-                    <div className="p-5 sm:p-7 bg-white/10 rounded-2xl">
-                        <h1 className="text-2xl sm:text-4xl font-bold mb-2 leading-tight">
-                            Add New Idea
-                        </h1>
-                        <p className="text-sm sm:text-lg opacity-90">
-                            Share your innovative concepts and bring them to life.
-                        </p>
-                    </div>
-                    <form
-                        onSubmit={onSubmit}
-                        className="md:p-10 md:space-y-8 md:w-3xl"
-                    >
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="md:col-span-2">
-                                <TextField name="title" isRequired>
-                                    <Label>Idea title</Label>
-                                    <Input
-                                        type="text"
-                                        placeholder="Ai study assistant"
-                                        className="rounded-2xlrounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-
-                            <div>
-                                <Select
-                                    name="category"
-                                    isRequired
-                                    className="w-full"
-                                    placeholder="Select category"
-                                >
-                                    <Label>Category</Label>
-                                    <Select.Trigger className="rounded-2xl min-h-12 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400">
-                                        <Select.Value />
-                                        <Select.Indicator />
-                                    </Select.Trigger>
-
-                                    <Select.Popover>
-                                        <ListBox >
-                                            {categories.map((cat) => (
-                                                <ListBox.Item
-                                                    key={cat}
-                                                    textValue={cat}>
-                                                    {cat}
-                                                    <ListBox.ItemIndicator />
-                                                </ListBox.Item>
-                                            ))}
-                                        </ListBox>
-                                    </Select.Popover>
-                                </Select>
-                            </div>
-
-                            <div>
-                                <TextField name="tags" isRequired>
-                                    <Label>Tags</Label>
-                                    <Input
-                                        placeholder="Ai, Education, etc..."
-                                        className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <TextField name="imgUrl" isRequired>
-                                    <Label>imgUrl</Label>
-                                    <Input
-                                        placeholder="https://example.com/image.jpg"
-                                        className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-
-                            <div>
-                                <TextField name="sortDescription" type="text" isRequired>
-                                    <Label>Short Description</Label>
-                                    <TextArea placeholder="Describe the estimated budget for your startup..."
-                                        className='rounded-2xl min-h-32 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400' />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-
-                            <div>
-                                <TextField name="description" type="text" isRequired>
-                                    <Label>Description</Label>
-                                    <TextArea placeholder="Describe your startup idea..."
-                                        className='rounded-2xl min-h-32 rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400' />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-                            <div>
-                                <TextField name="estimatedBudget" type="number" isRequired>
-                                    <Label>Estimated Budget</Label>
-                                    <Input
-                                        placeholder="5000"
-                                        className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-                            <div>
-                                <TextField name="targetAudience" type="text" isRequired>
-                                    <Label>Target Audience</Label>
-                                    <Input
-                                        placeholder="Students, Freelancers, etc..."
-                                        className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-                            <div className="md:col-span-2">
-                                <TextField name="problemStatement" type="text" isRequired>
-                                    <Label>Problem Statement</Label>
-                                    <Input
-                                        placeholder="Discibe the problem your startup aims to solve..."
-                                        className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <TextField name="proposedSolution" type="text" isRequired>
-                                    <Label>Proposed Solution</Label>
-                                    <Input
-                                        placeholder="Explain how your startup solves the problem..."
-                                        className="rounded-2xl border border-slate-500 bg-white/10 placeholder:text-gray-400" />
-                                    <FieldError />
-                                </TextField>
-                            </div>
-                        </div>
-
-                        {/* Buttons */}
-                        <div className="mt-5">
-                            <Button
-                                type="submit"
-                                variant="outline"
-                                className=" rounded-none w-full bg-cyan-500 text-white"
-                            >Add Your Idea
-                            </Button>
-                        </div>
-                    </form>
-                </div >
-            </div >
-        </>
-    );
-};
-
-export default AddIdeaPage;

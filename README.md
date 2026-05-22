@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IdeaVault – Startup Idea Sharing Platform
 
-## Getting Started
+**Live site:** [https://ideavault.vercel.app](https://ideavault.vercel.app) *(replace with your deployed URL after hosting)*
 
-First, run the development server:
+IdeaVault is a full-stack web app where entrepreneurs share startup ideas, explore community concepts, and validate ideas through comments and discussions.
+
+## Features
+
+- **Home experience** — Animated banner (3+ slides), trending ideas (top 6), success stories, and startup category highlights
+- **Ideas hub** — 3-column responsive grid with search (case-insensitive regex), category filter, and optional date range filter
+- **Authentication** — Email/password and Google sign-in with JWT for API calls; protected routes persist session on reload
+- **Add & manage ideas** — Full idea form (title, descriptions, category, tags, image, budget, audience, problem/solution) with update modal and delete confirmation
+- **Idea details & comments** — Private route with full idea view; add, edit, and delete your own comments with timestamps
+- **Profile & interactions** — Update name and photo; view ideas you have commented on
+- **Dark / light theme** — Global toggle from the navbar
+
+## Tech Stack
+
+| Layer    | Stack                                      |
+|----------|--------------------------------------------|
+| Client   | Next.js 16, React 19, Tailwind CSS, HeroUI |
+| Server   | Express, MongoDB                           |
+| Auth     | Better Auth + JWT (Bearer) for API         |
+
+## Run Locally
+
+### Server (`ideaVault-server`)
 
 ```bash
+cd ideaVault-server
+npm install
+# .env: PORT=8000, MONGODB_URI=..., JWT_SECRET=...
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Client (`ideaVault`)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+cd ideaVault
+npm install
+# .env: MONGODB_URI, BETTER_AUTH_SECRET, BETTER_AUTH_URL, GOOGLE_*, NEXT_PUBLIC_API_URL=http://localhost:8000
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+- **Client:** Vercel — set env vars and `NEXT_PUBLIC_API_URL` to your Render/Railway API URL
+- **Server:** Render or Railway — set `PORT`, `MONGODB_URI`, `JWT_SECRET`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Author
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built for CAT_01 – IdeaVault assignment.

@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+
+/* Dark mode: readable text across the app */
+.dark {
+  color-scheme: dark;
+}
+
+.dark nav a,
+.dark nav button {
+  color: inherit;
+}
