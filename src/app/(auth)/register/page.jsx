@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { syncAuthAfterLogin } from "@/lib/api";
 import { validatePassword } from "@/lib/password";
 import { Card } from "@heroui/react";
-import { Button, Form, Input, Label, TextField } from "@heroui/react";
+import { Button, Input, TextField } from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
@@ -74,21 +74,21 @@ function RegisterForm() {
         <p className="text-gray-500 mt-2">Join IdeaVault and start sharing ideas</p>
       </div>
       <Card className="p-4">
-        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <TextField name="name" isRequired>
-            <Label>Name</Label>
+            <label>Name</label>
             <Input placeholder="Your full name" />
           </TextField>
           <TextField name="email" isRequired>
-            <Label>Email</Label>
+            <label>Email</label>
             <Input type="email" placeholder="you@example.com" />
           </TextField>
           <TextField name="image">
-            <Label>Photo URL</Label>
+            <label>Photo URL</label>
             <Input type="url" placeholder="https://example.com/photo.jpg" />
           </TextField>
           <TextField name="password" isRequired>
-            <Label>Password</Label>
+            <label>Password</label>
             <Input
               type={isShowPassword ? "text" : "password"}
               placeholder="Min 6 chars, upper & lower case"
@@ -121,7 +121,7 @@ function RegisterForm() {
           <Button type="button" variant="outline" className="w-full" onPress={handleGoogleSignIn}>
             <FcGoogle className="text-xl" /> Continue with Google
           </Button>
-        </Form>
+        </form>
       </Card>
     </div>
   );

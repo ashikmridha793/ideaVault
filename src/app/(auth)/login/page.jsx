@@ -1,9 +1,9 @@
 "use client";
-
+export const dynamic = "force-dynamic"
 import { authClient } from "@/lib/auth-client";
 import { syncAuthAfterLogin } from "@/lib/api";
 import { Card } from "@heroui/react";
-import { Button, Form, Input, Label } from "@heroui/react";
+import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import PageTitle from "@/components/PageTitle";
 
 function LoginForm() {
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";
@@ -55,13 +56,13 @@ function LoginForm() {
         <p className="text-gray-500 mt-2">Sign in to share and validate startup ideas</p>
       </div>
       <Card className="p-4">
-        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <div>
-            <Label>Email</Label>
+            <label>Email</label>
             <Input name="email" type="email" placeholder="you@example.com" required />
           </div>
           <div>
-            <Label>Password</Label>
+            <label>Password</label>
             <Input
               name="password"
               type={isShowPassword ? "text" : "password"}
@@ -99,7 +100,7 @@ function LoginForm() {
           <Button type="button" variant="outline" className="w-full" onPress={handleGoogleSignIn}>
             <FcGoogle className="text-xl" /> Continue with Google
           </Button>
-        </Form>
+        </form>
       </Card>
     </div>
   );

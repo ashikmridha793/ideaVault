@@ -8,7 +8,7 @@ import {
   TextArea,
   Select,
   Button,
-  Label,
+  label,
   TextField,
   ListBox,
 } from "@heroui/react";
@@ -41,9 +41,9 @@ export default function AddIdeaPage() {
 
     const formData = new FormData(form);
     const idea = Object.fromEntries(formData.entries());
-    
+
     await syncJwtFromSession(user);
-    
+
     try {
       const res = await apiFetch("/ideas", {
         method: "POST",
@@ -78,13 +78,13 @@ export default function AddIdeaPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
                 <TextField name="title" isRequired>
-                  <Label>Idea Title</Label>
+                  <label>Idea Title</label>
                   <Input placeholder="AI study assistant for students" />
                 </TextField>
               </div>
 
               <Select name="category" isRequired placeholder="Select category">
-                <Label>Category</Label>
+                <label>Category</label>
                 <Select.Trigger className="w-full min-h-12 rounded-xl border border-slate-300">
                   <Select.Value />
                   <Select.Indicator />
@@ -101,47 +101,47 @@ export default function AddIdeaPage() {
               </Select>
 
               <TextField name="tags">
-                <Label>Tags (optional)</Label>
+                <label>Tags (optional)</label>
                 <Input placeholder="AI, Education, SaaS" />
               </TextField>
 
               <div className="md:col-span-2">
                 <TextField name="imgUrl" isRequired>
-                  <Label>Image URL</Label>
+                  <label>Image URL</label>
                   <Input placeholder="https://images.unsplash.com/..." />
                 </TextField>
               </div>
 
               <TextField name="sortDescription" isRequired>
-                <Label>Short Description</Label>
+                <label>Short Description</label>
                 <TextArea rows={3} placeholder="One-line pitch for your idea" />
               </TextField>
 
               <TextField name="description" isRequired>
-                <Label>Detailed Description</Label>
+                <label>Detailed Description</label>
                 <TextArea rows={3} placeholder="Full overview of the startup idea" />
               </TextField>
 
               <TextField name="estimatedBudget">
-                <Label>Estimated Budget (optional)</Label>
+                <label>Estimated Budget (optional)</label>
                 <Input type="number" placeholder="5000" />
               </TextField>
 
               <TextField name="targetAudience" isRequired>
-                <Label>Target Audience</Label>
+                <label>Target Audience</label>
                 <Input placeholder="Students, founders, SMEs..." />
               </TextField>
 
               <div className="md:col-span-2">
                 <TextField name="problemStatement" isRequired>
-                  <Label>Problem Statement</Label>
+                  <label>Problem Statement</label>
                   <TextArea rows={3} placeholder="What problem does this solve?" />
                 </TextField>
               </div>
 
               <div className="md:col-span-2">
                 <TextField name="proposedSolution" isRequired>
-                  <Label>Proposed Solution</Label>
+                  <label>Proposed Solution</label>
                   <TextArea rows={3} placeholder="How does your idea solve it?" />
                 </TextField>
               </div>

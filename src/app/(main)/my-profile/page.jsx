@@ -3,7 +3,7 @@
 import PageTitle from "@/components/PageTitle";
 import { authClient } from "@/lib/auth-client";
 import { syncJwtFromSession } from "@/lib/api";
-import { Avatar, Button, Form, Input, Label } from "@heroui/react";
+import { Avatar, Button, Input } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FaArrowDown } from "react-icons/fa6";
@@ -61,16 +61,16 @@ export default function MyProfilePage() {
         Edit<FaArrowDown />
       </div>
 
-      <Form onSubmit={onSubmit} className="space-y-4 border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-900">
+      <form onSubmit={onSubmit} className="space-y-4 border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-900">
         <div>
-          <Label>Name</Label>
+          <label>Name</label>
           <Input className="w-full"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required />
         </div>
         <div>
-          <Label>Photo URL</Label>
+          <label>Photo URL</label>
           <Input className="w-full"
             type="url"
             value={image}
@@ -81,7 +81,7 @@ export default function MyProfilePage() {
         <Button type="submit" className="w-full bg-indigo-600 text-white">
           Save Profile
         </Button>
-      </Form>
+      </form>
     </div>
   );
 }
