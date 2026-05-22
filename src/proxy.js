@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
-import { auth } from "./lib/auth";
+import { getAuth } from "./lib/auth";
 import { headers } from "next/headers";
-
 
 const protectedPaths = ["/my-ideas", "/my-interactions", "/add-idea", "/my-profile"];
 
 export async function proxy(request) {
   const { pathname } = request.nextUrl;
-  const isProtected = protectedPaths.some((p) => pathname === p
-    || pathname.startsWith(`${p}/`))
-    || pathname.startsWith("/idea/");
+  const isProtected =
+    protectedPaths.some((p) => pathname === p || pathname.startsWith(`${p}/`)) ||
+    pathname.startsWith("/idea/");
 
   if (!isProtected) {
-    return NextResponse.next()
+    return NextResponse.next();
   }
 
   try {
+    const auth = await getAuth();
     const session = await auth.api.getSession({
       headers: await headers(),
     });
@@ -25,7 +25,6 @@ export async function proxy(request) {
     }
   } catch (error) {
     console.error("[proxy] session check failed:", error?.message || error);
-    
     return NextResponse.next();
   }
 
@@ -35,5 +34,11 @@ export async function proxy(request) {
 }
 
 export const config = {
-  matcher: ["/my-ideas", "/my-interactions", "/add-idea", "/my-profile", "/idea/:path*",],
+  matcher: [
+    "/my-ideas",
+    "/my-interactions",
+    "/add-idea",
+    "/my-profile",
+    "/idea/:path*",
+  ],
 };

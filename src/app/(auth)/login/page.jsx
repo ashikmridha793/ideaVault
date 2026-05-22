@@ -38,10 +38,13 @@ function LoginForm() {
   };
 
   const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "google",
       callbackURL: redirectPath,
     });
+    if (error) {
+      toast.error(error.message || "Google sign-in failed. Check OAuth settings.");
+    }
   };
 
   return (

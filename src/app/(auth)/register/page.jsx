@@ -37,11 +37,16 @@ function RegisterForm() {
       name,
       email,
       password,
-      image: image || undefined,
+      image: image || undefined
     });
 
     if (error) {
-      toast.error(error.message || "Registration failed.");
+      const msg = error.message || "";
+      if (msg.toLowerCase().includes("database") || msg.includes("503")) {
+        toast.error("Database connection failed. Restart dev server and check MongoDB Atlas IP whitelist.");
+      } else {
+        toast.error(msg || "Registration failed.");
+      }
       return;
     }
     if (data) {
@@ -52,10 +57,13 @@ function RegisterForm() {
   };
 
   const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "google",
       callbackURL: redirectPath,
     });
+    if (error) {
+      toast.error(error.message || "Google sign-in failed. Check OAuth settings.");
+    }
   };
 
   return (

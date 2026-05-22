@@ -91,10 +91,10 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center text-slate-500 gap-4">
           <p className="text-sm">&copy; {new Date().getFullYear()} IdeaVault. All rights reserved.</p>
           <div className="flex gap-4 text-sm">
-            <Link href="/ideas" className="hover:text-slate-300">
+            <Link href="/Privacy" className="hover:text-slate-300">
               Privacy
             </Link>
-            <Link href="/ideas" className="hover:text-slate-300">
+            <Link href="/Terms" className="hover:text-slate-300">
               Terms
             </Link>
           </div>

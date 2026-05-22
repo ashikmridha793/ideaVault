@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   reactCompiler: true,
-  images:{
+  serverExternalPackages: ["mongodb", "better-auth", "@better-auth/mongo-adapter"],
+  images: {
     remotePatterns: [
       {
         protocol: 'https',

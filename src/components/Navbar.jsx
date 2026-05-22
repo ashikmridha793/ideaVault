@@ -12,8 +12,11 @@ import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const profileRef = useRef(null);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
@@ -93,13 +96,17 @@ const Navbar = () => {
             <Button
               variant="outline"
               onPress={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-xl cursor-pointer min-w-10 "
+              className="text-xl cursor-pointer min-w-10 text-slate-800 dark:text-white"
               aria-label="Toggle theme"
+              suppressHydrationWarning
             >
-              {
-                theme === "light" ?
-                  <IoMoonOutline /> : <IoSunnyOutline />
-              }
+              {!mounted ? (
+                <span className="w-5 h-5 inline-block" />
+              ) : theme === "light" ? (
+                <IoMoonOutline />
+              ) : (
+                <IoSunnyOutline />
+              )}
             </Button>
           </li>
 
