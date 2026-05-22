@@ -22,7 +22,7 @@ const Navbar = () => {
   useEffect(() => {
     if (user?.email && !jwtSynced.current) {
       jwtSynced.current = true;
-      syncJwtFromSession(user).catch(() => {});
+      syncJwtFromSession(user).catch(() => { });
     }
     if (!user?.email) jwtSynced.current = false;
   }, [user?.email]);
@@ -71,8 +71,11 @@ const Navbar = () => {
         </button>
 
         <ul
-          className={`${menuOpen ? "flex" : "hidden"
-            } sm:flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 absolute sm:static top-full left-0 right-0 sm:top-auto bg-white dark:bg-slate-950 sm:bg-transparent p-4 sm:p-0 border-b sm:border-0 border-slate-200 dark:border-slate-700`}
+          className={`
+            ${menuOpen
+              ? "flex" : "hidden"
+            }
+             sm:flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 absolute sm:static top-full left-0 right-0 sm:top-auto bg-white dark:bg-slate-950 sm:bg-transparent p-4 sm:p-2 border-b sm:border-0 border-slate-200 dark:border-slate-700`}
         >
           <li>
             <Navlinks href="/">Home</Navlinks>
@@ -89,8 +92,8 @@ const Navbar = () => {
           <li>
             <Button
               variant="outline"
-              onPress={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="text-xl cursor-pointer min-w-10"
+              onPress={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-xl cursor-pointer min-w-10 text-yellow-400"
               aria-label="Toggle theme"
             >
               {
@@ -109,7 +112,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     onClick={() => setProfileOpen(!profileOpen)}
-                    className="flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-600 px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="flex items-center gap-2 rounded-full border border-slate-500 dark:border-slate-600 px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-800"
                   >
                     <Avatar size="sm">
                       {user?.image ? (

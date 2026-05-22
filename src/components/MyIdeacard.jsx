@@ -27,15 +27,23 @@ const MyIdeaCard = ({ idea, onEdit, onDelete }) => {
         <p className="text-sm text-gray-500 line-clamp-1">Audience: {targetAudience}</p>
 
         <div className="flex gap-2 mt-4">
-          <Button size="sm" variant="outline" onPress={onEdit}>
+          <Button
+            size="sm"
+            variant="outline"
+            onPress={onEdit}>
             <FaEdit /> Edit
           </Button>
-          <Button size="sm" variant="danger" onPress={onDelete}>
+          <Button
+            size="sm"
+            variant="danger"
+            onPress={onDelete}>
             <MdDelete /> Delete
           </Button>
         </div>
 
-        <Button size="sm" className="mt-3 w-full bg-indigo-600 text-white">
+        <Button
+          size="sm"
+          className="mt-3 w-full bg-indigo-600 text-white">
           <Link
             className="flex w-full justify-center items-center gap-2"
             href={`/idea/${_id}`}

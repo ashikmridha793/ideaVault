@@ -32,16 +32,18 @@ export default function AddIdeaPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget
     const user = session?.user;
     if (!user) {
       toast.error("Please log in to add an idea");
       return;
     }
 
-    await syncJwtFromSession(user);
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const idea = Object.fromEntries(formData.entries());
-
+    
+    await syncJwtFromSession(user);
+    
     try {
       const res = await apiFetch("/ideas", {
         method: "POST",

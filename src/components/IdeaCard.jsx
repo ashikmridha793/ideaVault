@@ -23,9 +23,11 @@ const IdeaCard = ({ idea }) => {
         <p className="text-sm text-gray-500 mt-2 line-clamp-2">
           {sortDescription || `For ${targetAudience}`}
         </p>
-        <p className="text-sm font-semibold mt-2">Budget: ${estimatedBudget || "N/A"}</p>
-        <p className="text-xs text-gray-400 mt-1">Audience: {targetAudience}</p>
-        <Button size="sm" className="mt-auto pt-4 w-full bg-indigo-600 text-white">
+        <p className="text-sm font-semibold mt-2">
+          Budget: ${estimatedBudget || "N/A"}</p>
+        <p className="text-xs text-gray-400 mt-1">
+          Audience: {targetAudience}</p>
+        <Button size="sm" className="mt-2 py-4 w-full bg-indigo-600 text-white">
           <Link
             className="flex w-full justify-center items-center gap-2 py-1"
             href={`/idea/${_id}`}

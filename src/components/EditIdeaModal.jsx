@@ -52,30 +52,45 @@ export default function EditIdeaModal({ idea, isOpen, onClose, onSave }) {
               <Modal.Heading>Update Idea</Modal.Heading>
             </Modal.Header>
             <Modal.Body>
-              <form id="edit-idea-form" onSubmit={handleSubmit} className="space-y-4">
-                <TextField name="title" defaultValue={idea.title} isRequired>
+              <form
+                id="edit-idea-form"
+                onSubmit={handleSubmit}
+                className="space-y-4">
+                <TextField
+                  name="title"
+                  defaultValue={idea.title}
+                  isRequired>
                   <Label>Title</Label>
                   <Input />
                 </TextField>
                 <div>
-                  <Label className="mb-1 block">Category</Label>
+                  <Label
+                    className="mb-1 block">
+                    Category
+                  </Label>
                   <select
                     name="category"
                     defaultValue={idea.category}
                     className="w-full rounded-lg border border-slate-300 px-3 py-2 bg-transparent"
                   >
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
+                    {
+                      CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))
+                    }
                   </select>
                 </div>
-                <TextField name="sortDescription" defaultValue={idea.sortDescription || ""}>
+                <TextField
+                  name="sortDescription"
+                  defaultValue={idea.sortDescription || ""}>
                   <Label>Short Description</Label>
                   <TextArea rows={2} />
                 </TextField>
-                <TextField name="targetAudience" defaultValue={idea.targetAudience || ""}>
+                <TextField
+                  name="targetAudience"
+                  defaultValue={idea.targetAudience || ""}>
                   <Label>Target Audience</Label>
                   <Input />
                 </TextField>
@@ -89,10 +104,15 @@ export default function EditIdeaModal({ idea, isOpen, onClose, onSave }) {
               </form>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="outline" onPress={onClose}>
+              <Button
+                variant="outline"
+                onPress={onClose}>
                 Cancel
               </Button>
-              <Button type="submit" form="edit-idea-form" className="bg-indigo-600 text-white">
+              <Button
+                type="submit"
+                form="edit-idea-form"
+                className="bg-indigo-600 text-white">
                 Save Changes
               </Button>
             </Modal.Footer>
