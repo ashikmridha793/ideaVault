@@ -1,7 +1,5 @@
 # IdeaVault – Startup Idea Sharing Platform
 
-**Live site:** [https://ideavault.vercel.app](https://ideavault.vercel.app) *(replace with your deployed URL after hosting)*
-
 IdeaVault is a full-stack web app where entrepreneurs share startup ideas, explore community concepts, and validate ideas through comments and discussions.
 
 ## Features
@@ -29,26 +27,10 @@ IdeaVault is a full-stack web app where entrepreneurs share startup ideas, explo
 ```bash
 cd ideaVault-server
 npm install
-# .env: PORT=8000, MONGODB_URI=..., JWT_SECRET=...
 npm run dev
 ```
 
 ### Client (`ideaVault`)
 
-```bash
-cd ideaVault
-npm install
-# .env: MONGODB_URI, BETTER_AUTH_SECRET, BETTER_AUTH_URL, GOOGLE_*, NEXT_PUBLIC_API_URL=http://localhost:8000
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-## Deployment
-
-- **Client:** Vercel — set env vars and `NEXT_PUBLIC_API_URL` to your Render/Railway API URL
-- **Server:** Render or Railway — set `PORT`, `MONGODB_URI`, `JWT_SECRET`
-
 ## Author
 
-Built for CAT_01 – IdeaVault assignment.

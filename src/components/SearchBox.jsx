@@ -1,11 +1,13 @@
 "use client";
 
-import { Form, Label, SearchField, Select, ListBox } from "@heroui/react";
-import { useState } from "react";
+import { Form, Label, SearchField } from "@heroui/react";
+import { useRef, useState } from "react";
 
 const categories = ["All", "Tech", "Health", "AI", "Education", "Finance", "Business", "Environment", "Lifestyle"];
 
 const SearchBox = ({ onFilter }) => {
+  const myRef = useRef(null)
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [startDate, setStartDate] = useState("");

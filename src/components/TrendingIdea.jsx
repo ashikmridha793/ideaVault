@@ -3,10 +3,12 @@
 import IdeaCard from "@/components/IdeaCard";
 import LoadingSpiner from "@/components/LoadingSpiner";
 import { API_URL } from "@/lib/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegLightbulb } from "react-icons/fa";
 
 const TrendingIdea = () => {
+  const myRef = useRef(null)
+
   const [ideas, setIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
 

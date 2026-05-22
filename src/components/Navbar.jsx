@@ -11,6 +11,8 @@ import Navlinks from "./Navlinks";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
+  const myRef = useRef(null)
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);

@@ -4,11 +4,13 @@ import { authClient } from "@/lib/auth-client";
 import { apiFetch, syncJwtFromSession } from "@/lib/api";
 import { Button, TextArea } from "@heroui/react";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FaComment } from "react-icons/fa6";
 import { toast } from "react-toastify";
 
 const Comment = () => {
+  const myRef = useRef(null)
+
   const { id: ideaId } = useParams();
   const { data: session } = authClient.useSession();
   const user = session?.user;

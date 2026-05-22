@@ -4,11 +4,13 @@ import PageTitle from "@/components/PageTitle";
 import { authClient } from "@/lib/auth-client";
 import { syncJwtFromSession } from "@/lib/api";
 import { Avatar, Button, Input } from "@heroui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { FaArrowDown } from "react-icons/fa6";
 
 export default function MyProfilePage() {
+  const myRef = useRef(null)
+
   const { data: session, refetch } = authClient.useSession();
   const user = session?.user;
   const [name, setName] = useState("");

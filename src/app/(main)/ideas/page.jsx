@@ -5,10 +5,12 @@ import LoadingSpiner from "@/components/LoadingSpiner";
 import PageTitle from "@/components/PageTitle";
 import SearchBox from "@/components/SearchBox";
 import { API_URL } from "@/lib/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function AllIdeaPage() {
+  const myRef = useRef(null)
+
   const [filteredIdeas, setFilteredIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
 

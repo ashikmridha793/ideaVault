@@ -1,9 +1,11 @@
 "use client";
 
 import { Button, Modal, useOverlayState } from "@heroui/react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function DeleteConfirmModal({ isOpen, title, onClose, onConfirm }) {
+  const myRef = useRef(null)
+
   const state = useOverlayState({
     isOpen,
     onOpenChange: (open) => {

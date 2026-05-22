@@ -7,10 +7,12 @@ import MyIdeaCard from "@/components/MyIdeacard";
 import PageTitle from "@/components/PageTitle";
 import { apiFetch, syncJwtFromSession } from "@/lib/api";
 import { authClient } from "@/lib/auth-client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function MyIdeaPage() {
+  const myRef = useRef(null)
+
   const { data: session } = authClient.useSession();
   const user = session?.user;
 

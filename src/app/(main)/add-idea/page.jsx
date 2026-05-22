@@ -14,6 +14,7 @@ import {
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 const categories = [
   "Tech",
@@ -27,6 +28,8 @@ const categories = [
 ];
 
 export default function AddIdeaPage() {
+  const myRef = useRef(null)
+
   const router = useRouter();
   const { data: session } = authClient.useSession();
 

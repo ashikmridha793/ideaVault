@@ -2,7 +2,7 @@
 
 import { Button } from "@heroui/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const vaultSlide = [
   {
@@ -23,6 +23,8 @@ const vaultSlide = [
 ];
 
 const Banner = () => {
+  const myRef = useRef(null)
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {

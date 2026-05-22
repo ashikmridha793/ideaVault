@@ -6,10 +6,12 @@ import { apiFetch, syncJwtFromSession } from "@/lib/api";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function MyInteractionsPage() {
+  const myRef = useRef(null)
+
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const [interactions, setInteractions] = useState([]);

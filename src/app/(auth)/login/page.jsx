@@ -1,12 +1,12 @@
 "use client";
-export const dynamic = "force-dynamic"
+
 import { authClient } from "@/lib/auth-client";
 import { syncAuthAfterLogin } from "@/lib/api";
 import { Card } from "@heroui/react";
 import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -14,11 +14,12 @@ import PageTitle from "@/components/PageTitle";
 
 function LoginForm() {
 
+  const myRef = useRef(null)
+  
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";
   const [isShowPassword, setIsShowPassword] = useState(false);
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);

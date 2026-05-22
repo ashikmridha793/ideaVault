@@ -10,7 +10,7 @@ import {
   ListBox,
   useOverlayState,
 } from "@heroui/react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const CATEGORIES = [
   "Tech",
@@ -24,6 +24,8 @@ const CATEGORIES = [
 ];
 
 export default function EditIdeaModal({ idea, isOpen, onClose, onSave }) {
+  const myRef = useRef(null)
+
   const state = useOverlayState({
     isOpen,
     onOpenChange: (open) => {
