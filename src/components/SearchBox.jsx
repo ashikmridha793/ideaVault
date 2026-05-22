@@ -50,7 +50,7 @@ const SearchBox = ({ onFilter }) => {
       </div>
 
       <div>
-        <Label className="mb-1 block">From (optional)</Label>
+        <Label className="mb-1 block">From</Label>
         <input
           type="date"
           value={startDate}
@@ -60,7 +60,7 @@ const SearchBox = ({ onFilter }) => {
       </div>
 
       <div>
-        <Label className="mb-1 block">To (optional)</Label>
+        <Label className="mb-1 block">To</Label>
         <input
           type="date"
           value={endDate}

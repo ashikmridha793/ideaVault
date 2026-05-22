@@ -52,7 +52,7 @@ const Navbar = () => {
     : [];
 
   return (
-    <nav className="py-3 border-b border-slate-200 dark:border-slate-700 mb-4 sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur">
+    <nav className="py-3 border-b border-slate-200 dark:border-slate-700 mb-4 sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur rounded-2xl">
       <div className="w-11/12 mx-auto flex justify-between items-center gap-4">
         <Link
           href="/"
@@ -75,7 +75,7 @@ const Navbar = () => {
             ${menuOpen
               ? "flex" : "hidden"
             }
-             sm:flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 absolute sm:static top-full left-0 right-0 sm:top-auto bg-white dark:bg-slate-950 sm:bg-transparent p-4 sm:p-2 border-b sm:border-0 border-slate-200 dark:border-slate-700`}
+             sm:flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 absolute sm:static top-full left-0 right-0 sm:top-auto bg-white sm:bg-transparent p-4 sm:p-2 border-b sm:border-0 border-slate-200 dark:border-slate-700`}
         >
           <li>
             <Navlinks href="/">Home</Navlinks>
@@ -93,7 +93,7 @@ const Navbar = () => {
             <Button
               variant="outline"
               onPress={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-xl cursor-pointer min-w-10 text-yellow-400"
+              className="text-xl cursor-pointer min-w-10 "
               aria-label="Toggle theme"
             >
               {

@@ -49,9 +49,11 @@ export default function AllIdeaPage() {
         <p className="text-xl font-semibold text-center py-16 text-gray-500">No ideas found</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredIdeas.map((idea) => (
-            <IdeaCard key={idea._id} idea={idea} />
-          ))}
+          {
+            filteredIdeas.map((idea) => (
+              <IdeaCard key={idea._id} idea={idea} />
+            ))
+          }
         </div>
       )}
     </div>

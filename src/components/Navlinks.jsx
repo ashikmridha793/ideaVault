@@ -11,7 +11,7 @@ const Navlinks = ({ href, children }) => {
       className={`font-medium transition-colors ${
         isActive
           ? "text-indigo-600 dark:text-indigo-300"
-          : "text-white dark:text-white hover:text-indigo-600 dark:hover:text-indigo-300"
+          : "text-slate-800 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-300"
       }`}
     >
       {children}

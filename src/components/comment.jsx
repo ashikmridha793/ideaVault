@@ -129,9 +129,9 @@ const Comment = () => {
       }
 
       {loading ? (
-        <p className="text-gray-500">Loading comments...</p>
+        <p>Loading comments...</p>
       ) : comments.length === 0 ? (
-        <p className="text-gray-500">No comments yet. Be the first to share feedback.</p>
+        <p>No comments yet. Be the first to share feedback.</p>
       ) : (
         <div className="space-y-4">
           {
@@ -142,7 +142,7 @@ const Comment = () => {
               >
                 <div className="flex justify-between items-start gap-2">
                   <p className="font-semibold">{comment.userName}</p>
-                  <p className="text-xs text-gray-400 shrink-0">
+                  <p className="text-xs shrink-0">
                     {new Date(comment.createdAt).toLocaleString()}
                   </p>
                 </div>
@@ -168,7 +168,7 @@ const Comment = () => {
                     </div>
                   </div>
                 ) : (
-                  <p className="text-gray-700 mt-2">{comment.text}</p>
+                  <p className="text-sm m-2">{comment.text}</p>
                 )
                 }
 

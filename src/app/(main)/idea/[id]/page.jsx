@@ -100,7 +100,7 @@ export default async function IdeaDetailsPage({ params }) {
           <p className="text-gray-600 dark:text-gray-300">{proposedSolution}</p>
         </section>
         <section className="p-5 rounded-xl border border-slate-200 dark:border-slate-700">
-          <h2 className="text-xl font-semibold mb-2">Full Description</h2>
+          <h2 className="text-xl font-semibold mb-2">Description</h2>
           <p className="text-gray-600 dark:text-gray-300">{description}</p>
         </section>
       </div>
