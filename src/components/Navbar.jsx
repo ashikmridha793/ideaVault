@@ -1,5 +1,4 @@
 "use client";
-
 import { authClient } from "@/lib/auth-client";
 import { syncJwtFromSession, setStoredToken } from "@/lib/api";
 import { Avatar, Button, Spinner } from "@heroui/react";

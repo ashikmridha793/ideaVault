@@ -5,7 +5,7 @@ const Providers = ({children}) => {
     return (
         <ThemeProvider
         attribute="class"
-        defaultTheme="light"
+        defaultTheme="dark"
         enableSystem
         >
             {children}
