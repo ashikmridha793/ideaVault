@@ -45,7 +45,7 @@ function RegisterForm() {
     if (error) {
       const msg = error.message || "";
       if (msg.toLowerCase().includes("database") || msg.includes("503")) {
-        toast.error("Database connection failed. Restart dev server and check MongoDB Atlas IP whitelist.");
+        toast.error("somthing woants wrong");
       } else {
         toast.error(msg || "Registration failed.");
       }
@@ -64,7 +64,7 @@ function RegisterForm() {
       callbackURL: redirectPath,
     });
     if (error) {
-      toast.error(error.message || "Google sign-in failed. Check OAuth settings.");
+      toast.error(error.message || "Google sign-in failed");
     }
   };
 

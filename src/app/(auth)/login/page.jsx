@@ -15,9 +15,12 @@ import PageTitle from "@/components/PageTitle";
 function LoginForm() {
 
   const router = useRouter();
+
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";
+
   const [isShowPassword, setIsShowPassword] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -27,12 +30,12 @@ function LoginForm() {
     const { data, error } = await authClient.signIn.email({ email, password });
 
     if (error) {
-      toast.error(error.message || "Login failed. Check your credentials.");
+      toast.error(error.message || "Login failed.");
       return;
     }
     if (data) {
       await syncAuthAfterLogin(authClient);
-      toast.success("Welcome back to IdeaVault!");
+      toast.success("Welcome back to IdeaVault");
       router.push(redirectPath);
     }
   };
@@ -43,7 +46,7 @@ function LoginForm() {
       callbackURL: redirectPath,
     });
     if (error) {
-      toast.error(error.message || "Google sign-in failed. Check OAuth settings.");
+      toast.error(error.message || "Google sign-in failed");
     }
   };
 
