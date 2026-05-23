@@ -6,7 +6,7 @@ import { Card } from "@heroui/react";
 import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -14,8 +14,6 @@ import PageTitle from "@/components/PageTitle";
 
 function LoginForm() {
 
-  const myRef = useRef(null)
-  
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";

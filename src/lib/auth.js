@@ -5,7 +5,7 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { nextCookies } from "better-auth/next-js";
 import { getMongoClient, ensureMongoConnected } from "./mongodb";
 
-const baseURL = process.env.BETTER_AUTH_URL || "http://localhost:3000";
+const baseURL = process.env.BETTER_AUTH_URL;
 
 let authPromise = null;
 

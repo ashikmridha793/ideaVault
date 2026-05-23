@@ -3,7 +3,7 @@
 import LoadingSpiner from "@/components/LoadingSpiner";
 import PageTitle from "@/components/PageTitle";
 import { apiFetch, syncJwtFromSession } from "@/lib/api";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 export default function MyInteractionsPage() {
   const myRef = useRef(null)
 
-  const { data: session } = authClient.useSession();
+  const { data: session } = useSession();
   const user = session?.user;
   const [interactions, setInteractions] = useState([]);
   const [loading, setLoading] = useState(true);

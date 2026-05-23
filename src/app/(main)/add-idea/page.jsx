@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "@/components/PageTitle";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { apiFetch, syncJwtFromSession } from "@/lib/api";
 import {
   Input,
@@ -31,7 +31,7 @@ export default function AddIdeaPage() {
   const myRef = useRef(null)
 
   const router = useRouter();
-  const { data: session } = authClient.useSession();
+  const { data: session } = useSession();
 
   const onSubmit = async (e) => {
     e.preventDefault();

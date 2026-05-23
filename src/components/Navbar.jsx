@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { syncJwtFromSession, setStoredToken } from "@/lib/api";
 import { Avatar, Button, Spinner } from "@heroui/react";
 import { useTheme } from "next-themes";
@@ -11,7 +11,6 @@ import Navlinks from "./Navlinks";
 import { FaHamburger, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
-  const myRef = useRef(null)
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -21,7 +20,7 @@ const Navbar = () => {
 
   useEffect(() => setMounted(true), []);
 
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending } = useSession();
   const user = session?.user;
 
   const jwtSynced = useRef(false);

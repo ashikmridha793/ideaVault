@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { apiFetch, syncJwtFromSession } from "@/lib/api";
 import { Button, TextArea } from "@heroui/react";
 import { useParams } from "next/navigation";
@@ -12,7 +12,7 @@ const Comment = () => {
   const myRef = useRef(null)
 
   const { id: ideaId } = useParams();
-  const { data: session } = authClient.useSession();
+  const { data: session } = useSession();
   const user = session?.user;
 
   const [comments, setComments] = useState([]);

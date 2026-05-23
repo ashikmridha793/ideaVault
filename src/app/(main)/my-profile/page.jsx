@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "@/components/PageTitle";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { syncJwtFromSession } from "@/lib/api";
 import { Avatar, Button, Input } from "@heroui/react";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import { FaArrowDown } from "react-icons/fa6";
 export default function MyProfilePage() {
   const myRef = useRef(null)
 
-  const { data: session, refetch } = authClient.useSession();
+  const { data: session, refetch } = useSession();
   const user = session?.user;
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
