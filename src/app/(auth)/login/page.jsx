@@ -96,7 +96,11 @@ function LoginForm() {
               Create an account
             </Link>
           </p>
-          <Button type="button" variant="outline" className="w-full" onPress={handleGoogleSignIn}>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full"
+            onClick={handleGoogleSignIn}>
             <FcGoogle className="text-xl" /> Continue with Google
           </Button>
         </form>

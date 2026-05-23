@@ -31,10 +31,10 @@ export default function DeleteConfirmModal({ isOpen, title, onClose, onConfirm }
               </p>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="outline" onPress={onClose}>
+              <Button variant="outline" onClick={onClose}>
                 Cancel
               </Button>
-              <Button variant="danger" onPress={onConfirm}>
+              <Button variant="danger" onClick={onConfirm}>
                 Delete
               </Button>
             </Modal.Footer>

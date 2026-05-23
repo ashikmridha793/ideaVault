@@ -30,13 +30,13 @@ const MyIdeaCard = ({ idea, onEdit, onDelete }) => {
           <Button
             size="sm"
             variant="outline"
-            onPress={onEdit}>
+            onClick={onEdit}>
             <FaEdit /> Edit
           </Button>
           <Button
             size="sm"
             variant="danger"
-            onPress={onDelete}>
+            onClick={onDelete}>
             <MdDelete /> Delete
           </Button>
         </div>

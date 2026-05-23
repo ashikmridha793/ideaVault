@@ -108,7 +108,7 @@ export default function EditIdeaModal({ idea, isOpen, onClose, onSave }) {
             <Modal.Footer>
               <Button
                 variant="outline"
-                onPress={onClose}>
+                onClick={onClose}>
                 Cancel
               </Button>
               <Button

@@ -97,7 +97,7 @@ const Navbar = () => {
           <li>
             <Button
               variant="outline"
-              onPress={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="text-xl cursor-pointer min-w-10 text-slate-800 dark:text-white"
               aria-label="Toggle theme"
               suppressHydrationWarning

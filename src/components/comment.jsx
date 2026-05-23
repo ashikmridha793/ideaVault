@@ -121,7 +121,7 @@ const Comment = () => {
             />
             <Button
               type="button"
-              onPress={handlePost}
+              onClick={handlePost}
               className="w-full bg-indigo-600 text-white"
             >
               Post Comment
@@ -157,13 +157,13 @@ const Comment = () => {
                       rows={3}
                     />
                     <div className="flex gap-2">
-                      <Button size="sm" onPress={() => handleUpdate(comment._id)}>
+                      <Button size="sm" onClick={() => handleUpdate(comment._id)}>
                         Save
                       </Button>
                       <Button
                         size="sm"
                         variant="outline"
-                        onPress={() => setEditingId(null)}
+                        onClick={() => setEditingId(null)}
                       >
                         Cancel
                       </Button>
@@ -180,7 +180,7 @@ const Comment = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        onPress={() => {
+                        onClick={() => {
                           setEditingId(comment._id);
                           setEditText(comment.text);
                         }}
@@ -190,7 +190,7 @@ const Comment = () => {
                       <Button
                         size="sm"
                         variant="danger"
-                        onPress={() => handleDelete(comment._id)}
+                        onClick={() => handleDelete(comment._id)}
                       >
                         Delete
                       </Button>
