@@ -2,7 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { syncAuthAfterLogin } from "@/lib/api";
-import { Card } from "@heroui/react";
+import { Card, Form } from "@heroui/react";
 import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -58,7 +58,7 @@ function LoginForm() {
         <p className="text-gray-500 mt-2">Sign in to share and validate startup ideas</p>
       </div>
       <Card className="p-4">
-        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <div>
             <label>Email</label>
             <Input name="email" type="email" placeholder="you@example.com" required />
@@ -106,7 +106,7 @@ function LoginForm() {
             onClick={handleGoogleSignIn}>
             <FcGoogle className="text-xl" /> Continue with Google
           </Button>
-        </form>
+        </Form>
       </Card>
     </div>
   );

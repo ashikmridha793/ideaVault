@@ -3,7 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { syncAuthAfterLogin } from "@/lib/api";
 import { validatePassword } from "@/lib/password";
-import { Card } from "@heroui/react";
+import { Card, Form } from "@heroui/react";
 import { Button, Input, TextField } from "@heroui/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -76,7 +76,7 @@ function RegisterForm() {
         <p className="text-gray-500 mt-2">Join IdeaVault and start sharing ideas</p>
       </div>
       <Card className="p-4">
-        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <TextField name="name" isRequired>
             <label>Name</label>
             <Input placeholder="Your full name" />
@@ -123,7 +123,7 @@ function RegisterForm() {
           <Button type="button" variant="outline" className="w-full" onClick={handleGoogleSignIn}>
             <FcGoogle className="text-xl" /> Continue with Google
           </Button>
-        </form>
+        </Form>
       </Card>
     </div>
   );

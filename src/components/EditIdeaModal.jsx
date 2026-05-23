@@ -9,6 +9,7 @@ import {
   TextField,
   ListBox,
   useOverlayState,
+  Form,
 } from "@heroui/react";
 import { useEffect, useRef } from "react";
 
@@ -54,7 +55,7 @@ export default function EditIdeaModal({ idea, isOpen, onClose, onSave }) {
               <Modal.Heading>Update Idea</Modal.Heading>
             </Modal.Header>
             <Modal.Body>
-              <form
+              <Form
                 id="edit-idea-form"
                 onSubmit={handleSubmit}
                 className="space-y-4">
@@ -103,7 +104,7 @@ export default function EditIdeaModal({ idea, isOpen, onClose, onSave }) {
                   <Label>Estimated Budget</Label>
                   <Input type="number" />
                 </TextField>
-              </form>
+              </Form>
             </Modal.Body>
             <Modal.Footer>
               <Button

@@ -11,6 +11,7 @@ import {
   label,
   TextField,
   ListBox,
+  Form,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -77,7 +78,7 @@ export default function AddIdeaPage() {
             </p>
           </div>
 
-          <form onSubmit={onSubmit} className="space-y-6">
+          <Form onSubmit={onSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
                 <TextField name="title" isRequired>
@@ -153,7 +154,7 @@ export default function AddIdeaPage() {
             <Button type="submit" className="w-full bg-indigo-600 text-white py-3">
               Submit Idea
             </Button>
-          </form>
+          </Form>
         </div>
       </div>
     </>
