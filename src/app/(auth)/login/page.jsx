@@ -51,12 +51,16 @@ function LoginForm() {
   };
 
   return (
+
     <div className="container mx-auto max-w-md md:mb-20 my-10 p-6 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-lg bg-white dark:bg-slate-900">
+
       <PageTitle title="Login" />
+
       <div className="text-center mb-6">
         <h1 className="text-2xl md:text-4xl font-bold">Welcome Back</h1>
         <p className="text-gray-500 mt-2">Sign in to share and validate startup ideas</p>
       </div>
+      
       <Card className="p-4">
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <div>
