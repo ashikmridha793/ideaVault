@@ -17,7 +17,7 @@ async function createAuth() {
   return betterAuth({
     baseURL,
     secret: process.env.BETTER_AUTH_SECRET,
-    trustedOrigins: [baseURL, "http://localhost:3000"],
+    trustedOrigins: [baseURL, process.env.BETTER_AUTH_URL],
     database: mongodbAdapter(db, { client }),
     emailAndPassword: {
       enabled: true,

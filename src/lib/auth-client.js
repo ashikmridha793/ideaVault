@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 export const authClient = createAuthClient({
   baseURL:
     process.env.NEXT_PUBLIC_BETTER_AUTH_URL ||
-    (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"),
+    (typeof window !== "undefined" ? window.location.origin : process.env.BETTER_AUTH_URL),
 });
 
 export function useSession() {
