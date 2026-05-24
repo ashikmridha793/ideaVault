@@ -41,7 +41,7 @@ const SearchBox = ({ onFilter }) => {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2.5 bg-transparent"
+          className="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2.5 bg-white dark:bg-slate-800 "
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>
@@ -73,7 +73,7 @@ const SearchBox = ({ onFilter }) => {
 
       <button
         type="submit"
-        className="bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 px-6 rounded-lg font-medium"
+        className="bg-indigo-600 hover:bg-indigo-700 py-2.5 px-6 rounded-lg font-medium"
       >
         Filter
       </button>
